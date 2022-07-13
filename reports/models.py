@@ -7,7 +7,6 @@ class Report(models.Model):
         Student,
         on_delete= models.CASCADE
     )
-    
     is_active = models.BooleanField(default=True, verbose_name="Activity")
     document_pdf = models.FileField(verbose_name="Electronic Version of Document")
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Created Date")
