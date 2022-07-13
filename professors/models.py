@@ -25,12 +25,12 @@ class ProfessorLinkPosition(models.Model):
     is_active = models.BooleanField(verbose_name="Combination's Activity Status", default=True)
     created_date = models.DateTimeField(verbose_name="Created Date", auto_now_add=True)
     modified_date = models.DateTimeField(verbose_name="Modified Date", auto_now=True)
-    professor_id = models.ForeignKey(
+    professor_fk = models.ForeignKey(
         Professor,
         on_delete=models.CASCADE,
         verbose_name="ID of professor"
     )
-    position_id = models.ForeignKey(
+    position_fk = models.ForeignKey(
         JobPosition,
         on_delete=models.CASCADE,
         verbose_name="ID of position"

@@ -10,7 +10,6 @@ class Subject(models.Model):
         return "Subject: " + self.title
 
 class SubjectLinkProfessor(models.Model):
-    
     id = models.IntegerField(primary_key=True, verbose_name="ID of Subject and Professor combination", auto_created=True)
     professor_fk = models.ForeignKey(
         Professor,
