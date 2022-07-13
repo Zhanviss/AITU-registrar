@@ -14,4 +14,4 @@ class Report(models.Model):
     modified_date = models.DateTimeField(auto_now=True, verbose_name="Modified Date")
 
     def __str__(self) -> str:
-        return self.student_id.__str__() + " Created at: " + str(self.created_date) + " Modified at: " + str(self.modified_date)
+        return self.student_1to1.__str__() + " " + self.student_1to1.group_fk.__str__()
