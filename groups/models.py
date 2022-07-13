@@ -25,7 +25,7 @@ class GroupLinkProfessorSubject(models.Model):
         verbose_name="ID of Subject and Professor combination"
     )
     term_count = models.IntegerField(verbose_name="The term's number", default=1)
-    academ_year = models.CharField(verbose_name="ACADEM YEAR", default="FORMAT: yyyy - yyyy", max_length=30, unique=True)
+    academ_year = models.CharField(verbose_name="ACADEM YEAR", default="FORMAT: yyyy - yyyy", max_length=30)
     is_active = models.BooleanField(verbose_name="Combination's Activity Status", default=True)
 
     def __str__(self) -> str:

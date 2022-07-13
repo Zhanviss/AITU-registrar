@@ -1,5 +1,5 @@
 from django.db import models
-from professors.models import Professor
+from professors.models import Professor, ProfessorLinkPosition
 # Create your models here.
 class Subject(models.Model):
     id = models.IntegerField(verbose_name="Subject's ID", primary_key=True, auto_created=True)
@@ -12,7 +12,7 @@ class Subject(models.Model):
 class SubjectLinkProfessor(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="ID of Subject and Professor combination", auto_created=True)
     professor_fk = models.ForeignKey(
-        Professor,
+        ProfessorLinkPosition,
         verbose_name="Professors of this Subject",
         on_delete=models.CASCADE
     )
