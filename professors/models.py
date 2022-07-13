@@ -37,4 +37,4 @@ class ProfessorLinkPosition(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.professor_id.__str__() + " " + self.position_id.__str__()
+        return self.professor_fk.__str__() + " " + self.position_fk.__str__()

@@ -22,4 +22,4 @@ class SubjectLinkProfessor(models.Model):
         on_delete=models.CASCADE,
     )
     def __str__(self) -> str:
-        return self.professor_id.__str__() +" " + self.subject_id.__str__()
+        return self.professor_fk.__str__() +" " + self.subject_fk.__str__()
