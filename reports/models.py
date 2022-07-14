@@ -32,6 +32,7 @@ class Report(models.Model):
         null=True,
         verbose_name="Group"
     )
+    skipped_days = models.CharField(default="dd.mm.yyyy - dd.mm.yyyy", max_length=120, verbose_name="Days missed by student")
     is_active = models.BooleanField(default=True, verbose_name="Activity")
     document_pdf = models.FileField(verbose_name="Electronic Version of Document")
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Created Date")
