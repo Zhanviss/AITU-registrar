@@ -27,12 +27,14 @@ class ProfessorLinkPosition(models.Model):
     modified_date = models.DateTimeField(verbose_name="Modified Date", auto_now=True)
     professor_fk = models.ForeignKey(
         Professor,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null=True,
         verbose_name="ID of professor"
     )
     position_fk = models.ForeignKey(
         JobPosition,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null=True,
         verbose_name="ID of position"
     )
 

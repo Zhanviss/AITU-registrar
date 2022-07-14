@@ -12,7 +12,8 @@ class Student(models.Model):
     student_email = models.CharField(verbose_name="Student's e-mail", max_length=255, unique=True)
     group_fk = models.ForeignKey(
         Group,
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL,
+        null=True
     )
     
     def __str__(self) -> str:

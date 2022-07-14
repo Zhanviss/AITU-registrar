@@ -10,18 +10,20 @@ class Group(models.Model):
     modified_date = models.DateTimeField(verbose_name="Modified Date", auto_now=True)
 
     def __str__(self) -> str:
-        return "Group: " + self.group_name
+        return self.group_name
 
 class GroupLinkProfessorSubject(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="ID of Group and Professor+Subject combination", auto_created=True)
     group_fk = models.ForeignKey(
         Group,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null=True,
         verbose_name="ID of Group"
     )
     prof_subj_fk = models.ForeignKey(
         SubjectLinkProfessor,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null=True,
         verbose_name="ID of Subject and Professor combination"
     )
     term_count = models.IntegerField(verbose_name="The term's number", default=1)

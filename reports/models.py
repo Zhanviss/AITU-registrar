@@ -9,26 +9,27 @@ class Report(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="Report ID", auto_created=True)
     student_1to1 = models.OneToOneField(
         Student,
-        on_delete= models.CASCADE,
-        verbose_name="Student Reported"
+        on_delete= models.SET_NULL,
+        verbose_name="Student Reported",
+        null=True
     )
     subject_1to1 = models.OneToOneField(
         Subject,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         default = None,
         null=True,
         verbose_name="Subject of Student Reported"
     )
     professor_1to1 = models.OneToOneField(
         Professor,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         default = None,
         null=True,
         verbose_name="Professor of Student Reported"
     )
     group_1to1 = models.OneToOneField(
         Group,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True,
         verbose_name="Group"
     )

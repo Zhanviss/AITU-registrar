@@ -7,19 +7,21 @@ class Subject(models.Model):
     is_retake = models.BooleanField(verbose_name="Retaken status", default=False)
 
     def __str__(self) -> str:
-        return "Subject: " + self.title
+        return self.title
 
 class SubjectLinkProfessor(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="ID of Subject and Professor combination", auto_created=True)
     professor_fk = models.ForeignKey(
         ProfessorLinkPosition,
         verbose_name="Professors of this Subject",
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL,
+        null=True
     )
     subject_fk = models.ForeignKey(
         Subject,
         verbose_name="Subjects of this Professor",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null = True
     )
     def __str__(self) -> str:
         return self.professor_fk.__str__() +" " + self.subject_fk.__str__()
