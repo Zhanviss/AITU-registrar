@@ -1,0 +1,4 @@
+<option value="">---------</option>
+{% for professor in professors %}
+<option value="{{ professor.id }}">{{ professor.prof_subj_fk.professor_fk.professor_fk.first_name }} {{ professor.prof_subj_fk.professor_fk.professor_fk.last_name }} </option>
+{% endfor %}

@@ -31,3 +31,8 @@ def load_subjects(request):
     group_id = request.GET.get('group_1to1')
     subjects = GroupLinkProfessorSubject.objects.filter(group_fk=group_id)
     return render(request, 'subjects_dropdown_list_options.html', {'subjects': subjects})
+
+def load_professors(request):
+    group_id = request.GET.get('group_1to1')
+    professors = GroupLinkProfessorSubject.objects.filter(group_fk=group_id)
+    return render(request, 'professors_dropdown_list_options.html', {'professors': professors})

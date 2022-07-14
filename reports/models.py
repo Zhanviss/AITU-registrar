@@ -2,7 +2,8 @@ from tokenize import group
 from django.db import models
 from students.models import Student
 from subjects.models import Subject
-from groups.models import GroupLinkProfessorSubject, Group
+from groups.models import  Group
+from professors.models import Professor
 # Create your models here.
 class Report(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="Report ID", auto_created=True)
@@ -17,6 +18,13 @@ class Report(models.Model):
         default = None,
         null=True,
         verbose_name="Subject of Student Reported"
+    )
+    professor_1to1 = models.OneToOneField(
+        Professor,
+        on_delete=models.CASCADE,
+        default = None,
+        null=True,
+        verbose_name="Professor of Student Reported"
     )
     group_1to1 = models.OneToOneField(
         Group,
