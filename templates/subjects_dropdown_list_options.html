@@ -1,4 +1,4 @@
 <option value="">---------</option>
 {% for subject in subjects %}
-<option value="{{ grouplinkprofessorsubject.id }}">{{ grouplinkprofessorsubject.prof_subj_fk.subject_fk.title }}</option>
+<option value="{{ subject.id }}">{{ subject.prof_subj_fk.subject_fk.title }}</option>
 {% endfor %}
