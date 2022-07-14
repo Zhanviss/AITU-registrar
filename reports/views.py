@@ -4,7 +4,7 @@ from django.views.generic import ListView, CreateView, DetailView
 from .models import Report
 from students.models import Student
 from .forms import ReportForm
-from groups.models import Group
+from groups.models import GroupLinkProfessorSubject
 # Create your views here.
 #models.TextField(default=GroupLinkProfessorSubject.objects.all().filter(self.student_1to1.group_fk == GroupLinkProfessorSubject.group_fk).__str__())
 
@@ -26,3 +26,8 @@ def load_students(request):
     group_id = request.GET.get('group_1to1')
     students = Student.objects.filter(group_fk=group_id)
     return render(request, 'students_dropdown_list_options.html', {'students': students})
+
+def load_subjects(request):
+    group_id = request.GET.get('group_1to1')
+    subjects = GroupLinkProfessorSubject.objects.filter(group_fk=group_id)
+    return render(request, 'subjects_dropdown_list_options.html', {'subjects': subjects})
