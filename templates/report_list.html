@@ -1,0 +1,9 @@
+<h1> REPORT LIST </h1> 
+<p> <a href="{% url 'report-new' %}"> + New Report</a> </p>
+{% block content %}
+    {% for report in report_list %}
+    <div class="report-entry">
+        <p>Report ID: {{report.id}} {{report.student_1to1}} |<a href="{% url 'report-detail' report.pk %}">View Details</a></p>
+    </div>
+    {% endfor %}
+{% endblock content %}
