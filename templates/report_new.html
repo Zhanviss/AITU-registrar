@@ -1,6 +1,8 @@
 <h2>Report Form</h2>
 
-<form method="post" id="reportForm" data-students-url="{% url 'ajax_load_students' %}" data-subjects-url="{% url 'ajax_load_subjects' %}" 
+<form method="post" id="reportForm" 
+  data-students-url="{% url 'ajax_load_students' %}" 
+  data-subjects-url="{% url 'ajax_load_subjects' %}" 
   data-professors-url="{% url 'ajax_load_professors' %}" novalidate>
   {% csrf_token %}
   <table>

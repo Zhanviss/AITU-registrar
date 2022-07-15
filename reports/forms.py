@@ -22,13 +22,13 @@ class ReportForm(forms.ModelForm):
             try:
                 group_id = int(self.data.get('group_1to1'))
                 self.fields['student_1to1'].queryset = Student.objects.filter(group_fk = group_id).order_by()
-                self.fields['subject_1to1'].queryset = int(GroupLinkProfessorSubject.objects.filter(group_fk = group_id).order_by())
-                self.fields['professor_1to1'].queryset = int(GroupLinkProfessorSubject.objects.filter(group_fk = group_id).order_by())
+                self.fields['subject_1to1'].queryset = GroupLinkProfessorSubject.objects.filter(group_fk = group_id).order_by()
+                self.fields['professor_1to1'].queryset = GroupLinkProfessorSubject.objects.filter(group_fk = group_id).order_by()
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty objects queryset
         
         elif self.instance.pk:
             self.fields['student_1to1'].queryset = self.instance.group_1to1.student_1to1_set
-            self.fields['subject_1to1'].queryset = int(self.instance.group_1to1.subject_1to1_set)
-            self.fields['professor_1to1'].queryset = int(self.instance.group_1to1.professor_1to1_set)
+            self.fields['subject_1to1'].queryset = self.instance.group_1to1.subject_1to1_set
+            self.fields['professor_1to1'].queryset = self.instance.group_1to1.professor_1to1_set
         
