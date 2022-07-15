@@ -1,4 +1,5 @@
 from tokenize import group
+from typing import Any
 from django.db import models
 from students.models import Student
 from subjects.models import Subject
@@ -25,7 +26,8 @@ class Report(models.Model):
         on_delete=models.SET_NULL,
         default = None,
         null=True,
-        verbose_name="Professor of Student Reported"
+        verbose_name="Professor of Student Reported",
+
     )
     group_1to1 = models.OneToOneField(
         Group,

@@ -18,10 +18,10 @@ class ReportForm(forms.ModelForm):
 
         if 'group' in self.data:
             try:
-                group_id = self.data.get('group_1to1')
-                self.fields['student_1to1'].queryset = Student.objects.filter(group_fk = group_id)
-                self.fields['subject_1to1'].queryset = GroupLinkProfessorSubject.objects.filter(group_fk = group_id)
-                self.fields['professor_1to1'].queryset = GroupLinkProfessorSubject.objects.filter(group_fk = group_id)
+                group_id = int(self.data.get('group_1to1'))
+                self.fields['student_1to1'].queryset = Student.objects.filter(group_fk = group_id).order_by()
+                self.fields['subject_1to1'].queryset = GroupLinkProfessorSubject.objects.filter(group_fk = group_id).order_by()
+                self.fields['professor_1to1'].queryset = GroupLinkProfessorSubject.objects.filter(group_fk = group_id).order_by()
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty objects queryset
         
