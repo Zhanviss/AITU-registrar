@@ -1,6 +1,11 @@
 <h1>Report Details</h1>
 <p>ID: {{report.id}}</p>
 <p>{{report.student_1to1}}</p>
-<p>{{report.student_1to1.group_fk}}</p>
+<p>Group: {{report.student_1to1.group_fk}}</p>
+<p>Skipped Period: {{report.skipped_days}}</p>
+<p>Skipped Subject: {{report.subject_1to1}}</p>
+<p>{{report.professor_1to1}}</p>
+<p>Active: {{report.is_active}}</p>
 <p>Created Date: {{report.created_date}}</p>
+<p>Last Modified Date: {{report.modified_date}}</p>
 <a href="{% url 'report_list' %}"> Back</a>
