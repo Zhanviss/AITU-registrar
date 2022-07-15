@@ -6,21 +6,21 @@ from students.models import Student
 from .forms import ReportForm
 from groups.models import GroupLinkProfessorSubject
 # Create your views here.
-#models.TextField(default=GroupLinkProfessorSubject.objects.all().filter(self.student_1to1.group_fk == GroupLinkProfessorSubject.group_fk).__str__())
-
 class ReportList(ListView):
     model = Report
+    context_object_name = 'report'
     template_name = "report_list.html"
 
 class ReportDetail(DetailView):
     model = Report 
+    context_object_name = 'report'
     template_name = "report_detail.html"
 
 class ReportCreate(CreateView):
     model = Report 
     form_class = ReportForm
     template_name = 'report_new.html'
-    success_url = reverse_lazy('report-list')
+    success_url = reverse_lazy('report_list')
 
 def load_students(request):
     group_id = request.GET.get('group_1to1')
