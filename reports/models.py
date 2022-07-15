@@ -8,14 +8,14 @@ from professors.models import Professor
 # Create your models here.
 class Report(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="Report ID", auto_created=True)
-    student_1to1 = models.OneToOneField(
+    student_1to1 = models.ForeignKey(
         Student,
         on_delete= models.SET_NULL,
         verbose_name="Student Reported",
         null=True,
         unique=False
     )
-    subject_1to1 = models.OneToOneField(
+    subject_1to1 = models.ForeignKey(
         Subject,
         on_delete=models.SET_NULL,
         default = None,
@@ -23,7 +23,7 @@ class Report(models.Model):
         verbose_name="Subject of Student Reported",
         unique=False
     )
-    professor_1to1 = models.OneToOneField(
+    professor_1to1 = models.ForeignKey(
         Professor,
         on_delete=models.SET_NULL,
         default = None,
@@ -32,7 +32,7 @@ class Report(models.Model):
         unique=False
 
     )
-    group_1to1 = models.OneToOneField(
+    group_1to1 = models.ForeignKey(
         Group,
         on_delete=models.SET_NULL,
         null=True,
