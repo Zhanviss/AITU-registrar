@@ -1,7 +1,7 @@
 {% block content %}
 {% if user.is_authenticated %}
 <h1> REPORT LIST </h1> 
-Hi {{ user.email }}!
+Hi, {{ user.username }}!
 <p><a href="{% url 'logout' %}">Log Out</a></p>
 <p> <a href="{% url 'report_new' %}"> + New Report</a> </p>
 {% for report in object_list %}

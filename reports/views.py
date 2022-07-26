@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, DetailView
 from .models import Report
 from students.models import Student
@@ -7,17 +8,17 @@ from .forms import ReportForm
 from groups.models import GroupLinkProfessorSubject
 # Create your views here.
 
-class ReportList(ListView):
+class ReportList(LoginRequiredMixin, ListView):
     model = Report
     context_object_name = 'report'
     template_name = "report_list.html"
 
-class ReportDetail(DetailView):
+class ReportDetail(LoginRequiredMixin,DetailView):
     model = Report 
     context_object_name = 'report'
     template_name = "report_detail.html"
 
-class ReportCreate(CreateView):
+class ReportCreate(LoginRequiredMixin, CreateView):
     model = Report 
     form_class = ReportForm
     template_name = 'report_new.html'
