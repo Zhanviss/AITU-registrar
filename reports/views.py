@@ -6,6 +6,7 @@ from students.models import Student
 from .forms import ReportForm
 from groups.models import GroupLinkProfessorSubject
 # Create your views here.
+
 class ReportList(ListView):
     model = Report
     context_object_name = 'report'
