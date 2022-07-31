@@ -1,3 +1,4 @@
+from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -49,7 +50,7 @@ def load_professors(request):
 
 
 def get_document(request, pk):
-    doc = DocxTemplate("template.docx")
+    doc = DocxTemplate("reports/report_template.docx")
     url = f'http://127.0.0.1:8000/reports/{pk}/'
 
 # Ignore SSL certificate errors
@@ -59,6 +60,7 @@ def get_document(request, pk):
 
     html = urllib.request.urlopen(url, context=ctx).read()
     soup = BeautifulSoup(html, 'html.parser')
+    report_id = soup.find('div', class_='ID').p.text 
     student_name = soup.find('div', class_='Student').p.text 
     group_name = soup.find('div', class_='Group').p.text 
     skipped_period = soup.find('div', class_='Skipped Period').p.text
@@ -67,6 +69,27 @@ def get_document(request, pk):
     professor_email = soup.find('div', class_='Professor Email').p.text
     context = { 'student_name' : student_name, 'group_name' : group_name, 'period_date':skipped_period, 'professor_name' : professor_name, 'subject_name':skipped_subject}
     doc.render(context)
-    doc.save(f"{student_name}__ID:{pk}.docx")
-    return render(request, 'send_email.html', {'professor':professor_name, 'professor_email':professor_email})
+    doc.save(f"reports/ID_{pk}.docx")
+    return render(request, 'send_email.html', {'id':report_id, 'professor':professor_name, 'professor_email':professor_email})
 
+def send_email(request, pk):
+    url = f'http://127.0.0.1:8000/reports/{pk}/document-generated'
+
+# Ignore SSL certificate errors
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+
+    html = urllib.request.urlopen(url, context=ctx).read()
+    soup = BeautifulSoup(html, 'html.parser')
+    professor_email = soup.find('div', class_='Receiver').p.text
+    email = EmailMessage(
+        f'The Report with ID {pk}',
+        "Good afternoon! Please, check the attached file below in order to fix reported students' attendance. Thank you!",
+        'zhan5.z@yandex.com',
+        [f'{professor_email}', 'zhansvis@gmail.com', 'zhansvis@yahoo.com'],
+        reply_to=['zhansvis@gmail.com'],
+    )
+    email.attach_file(f'reports/ID_{pk}.docx')
+    email.send(fail_silently=False)
+    return render(request, 'email_sent.html')

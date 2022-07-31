@@ -1,5 +1,5 @@
-<h1>Document is generated</h1>
-<p>Do you want to send e-mail version of the document to {{professor}}?</p>
-<p> Email address of receiver: {{professor_email}}</p>
-<button>Yes</button>
-<button onclick="location.href='{% url 'report_list' %}'">No</button>
+<h1>Document with id {{id}} is generated</h1>
+<p>Do you want to send e-version of the document to {{professor}} through email?</p>
+<div class="Receiver"><p>{{professor_email}}</p></div>
+<a href="{% url 'send_email' id %}"> Yes</a>
+<a href="{% url 'report_list' %}">No</a>
