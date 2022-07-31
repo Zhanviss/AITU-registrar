@@ -8,9 +8,9 @@ from .models import Report
 from students.models import Student
 from .forms import ReportForm
 from groups.models import GroupLinkProfessorSubject
+from subjects.models import SubjectLinkProfessor
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
-import requests
 import ssl
 from docxtpl import DocxTemplate
 # Create your views here.
@@ -45,7 +45,8 @@ def load_subjects(request):
 
 def load_professors(request):
     group_id = request.GET.get('group_1to1')
-    professors = GroupLinkProfessorSubject.objects.filter(group_fk=group_id)
+    subject_id = request.GET.get('subject_1to1')
+    professors = SubjectLinkProfessor.objects.filter(subject_fk=subject_id)
     return render(request, 'professors_dropdown_list_options.html', {'professors': professors})
 
 

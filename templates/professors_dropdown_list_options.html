@@ -1,5 +1,5 @@
 <option value="">---------------------------------------------------</option>
 {% for professor in professors %}
-<option value="{{ professor.id }}">{{ professor.prof_subj_fk.professor_fk.professor_fk.first_name }} 
-    {{ professor.prof_subj_fk.professor_fk.professor_fk.last_name }} - {{ professor.prof_subj_fk.professor_fk.position_fk.title }} </option>
+<option value="{{ professor.id }}">{{ professor.professor_fk.professor_fk.first_name }} 
+    {{ professor.professor_fk.professor_fk.last_name }} - {{ professor.professor_fk.position_fk.title }} </option>
 {% endfor %}
