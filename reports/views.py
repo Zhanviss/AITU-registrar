@@ -47,13 +47,10 @@ def load_professors(request):
     professors = GroupLinkProfessorSubject.objects.filter(group_fk=group_id)
     return render(request, 'professors_dropdown_list_options.html', {'professors': professors})
 
-def get_url(request):
-    urlObject = request._current_scheme_host + request.path
-    return urlObject
 
-def get_document(request):
+def get_document(request, pk):
     doc = DocxTemplate("template.docx")
-    url = f'http://127.0.0.1:8000/reports/20/'
+    url = f'http://127.0.0.1:8000/reports/{pk}/'
 
 # Ignore SSL certificate errors
     ctx = ssl.create_default_context()
@@ -69,6 +66,6 @@ def get_document(request):
     professor_name = soup.find('div', class_='Professor').p.text
     context = { 'student_name' : student_name, 'group_name' : group_name, 'period_date':skipped_period, 'professor_name' : professor_name, 'subject_name':skipped_subject}
     doc.render(context)
-    doc.save(f"{student_name}_{skipped_period}.docx")
+    doc.save(f"{student_name}_{skipped_period}_{pk}.docx")
     return HttpResponse("done")
 
