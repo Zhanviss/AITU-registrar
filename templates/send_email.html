@@ -1,5 +1,8 @@
 <h1>Document with id {{id}} is generated</h1>
-<p>Do you want to send e-version of the document to {{professor}} through email?</p>
+<p>Do you want to send e-version of the document through email to?</p>
+<h3>Professor:</h3>
+<div class="Professor"><p>{{professor}}</p></div>
+<h4>Email:</h4>
 <div class="Receiver"><p>{{professor_email}}</p></div>
 <a href="{% url 'send_email' id %}"> Yes</a>
 <a href="{% url 'report_list' %}">No</a>
