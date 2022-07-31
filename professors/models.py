@@ -11,7 +11,7 @@ class Professor(models.Model):
     professor_email = models.CharField(verbose_name="Professor's e-mail", max_length=255, unique=True)
     
     def __str__(self) -> str:
-        return "Professor: " + self.first_name + " " + self.last_name
+        return self.first_name + " " + self.last_name
 
 class JobPosition(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="Professor job position's ID", auto_created=True)

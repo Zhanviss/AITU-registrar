@@ -17,4 +17,4 @@ class Student(models.Model):
     )
     
     def __str__(self) -> str:
-        return "Student: " + self.first_name + " "  + self.last_name
+        return self.first_name + " "  + self.last_name

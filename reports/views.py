@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -6,6 +7,11 @@ from .models import Report
 from students.models import Student
 from .forms import ReportForm
 from groups.models import GroupLinkProfessorSubject
+import urllib.request, urllib.parse, urllib.error
+from bs4 import BeautifulSoup
+import requests
+import ssl
+from docxtpl import DocxTemplate
 # Create your views here.
 
 class ReportList(LoginRequiredMixin, ListView):
@@ -13,10 +19,12 @@ class ReportList(LoginRequiredMixin, ListView):
     context_object_name = 'report'
     template_name = "report_list.html"
 
-class ReportDetail(LoginRequiredMixin,DetailView):
+class ReportDetail(DetailView):
     model = Report 
     context_object_name = 'report'
     template_name = "report_detail.html"
+    success_url = reverse_lazy('report_list')
+
 
 class ReportCreate(LoginRequiredMixin, CreateView):
     model = Report 
@@ -38,3 +46,29 @@ def load_professors(request):
     group_id = request.GET.get('group_1to1')
     professors = GroupLinkProfessorSubject.objects.filter(group_fk=group_id)
     return render(request, 'professors_dropdown_list_options.html', {'professors': professors})
+
+def get_url(request):
+    urlObject = request._current_scheme_host + request.path
+    return urlObject
+
+def get_document(request):
+    doc = DocxTemplate("template.docx")
+    url = f'http://127.0.0.1:8000/reports/20/'
+
+# Ignore SSL certificate errors
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+
+    html = urllib.request.urlopen(url, context=ctx).read()
+    soup = BeautifulSoup(html, 'html.parser')
+    student_name = soup.find('div', class_='Student').p.text 
+    group_name = soup.find('div', class_='Group').p.text 
+    skipped_period = soup.find('div', class_='Skipped Period').p.text
+    skipped_subject = soup.find('div', class_='Skipped Subject').p.text
+    professor_name = soup.find('div', class_='Professor').p.text
+    context = { 'student_name' : student_name, 'group_name' : group_name, 'period_date':skipped_period, 'professor_name' : professor_name, 'subject_name':skipped_subject}
+    doc.render(context)
+    doc.save(f"{student_name}_{skipped_period}.docx")
+    return HttpResponse("done")
+
