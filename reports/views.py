@@ -64,8 +64,9 @@ def get_document(request, pk):
     skipped_period = soup.find('div', class_='Skipped Period').p.text
     skipped_subject = soup.find('div', class_='Skipped Subject').p.text
     professor_name = soup.find('div', class_='Professor').p.text
+    professor_email = soup.find('div', class_='Professor Email').p.text
     context = { 'student_name' : student_name, 'group_name' : group_name, 'period_date':skipped_period, 'professor_name' : professor_name, 'subject_name':skipped_subject}
     doc.render(context)
-    doc.save(f"{student_name}_{skipped_period}_{pk}.docx")
-    return HttpResponse("done")
+    doc.save(f"{student_name}__ID:{pk}.docx")
+    return render(request, 'send_email.html', {'professor':professor_name, 'professor_email':professor_email})
 

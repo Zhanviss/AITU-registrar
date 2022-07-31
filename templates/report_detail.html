@@ -22,5 +22,8 @@
     <p>Created Date: {{report.created_date}}</p>
     <p>Last Modified Date: {{report.modified_date}}</p>    
 </div>
+<div class="Professor Email">
+    <p>{{report.professor_1to1.professor_email}}</p>
+</div>
 <button onclick="location.href='{% url 'get_document' report.pk %}'">Press Here to Generate Document</button>
 <a href="{% url 'report_list' %}"> Back</a>
