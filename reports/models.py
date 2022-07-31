@@ -7,7 +7,6 @@ from groups.models import  Group
 from professors.models import Professor
 # Create your models here.
 class Report(models.Model):
-    id = models.IntegerField(primary_key=True, verbose_name="Report ID", auto_created=True)
     student_1to1 = models.ForeignKey(
         Student,
         on_delete= models.SET_NULL,

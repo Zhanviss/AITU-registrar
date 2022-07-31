@@ -8,7 +8,7 @@ from professors.models import Professor
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report 
-        fields = ('id', 'group_1to1', 'student_1to1', 'subject_1to1', 'professor_1to1', 'skipped_days','document_pdf', )
+        fields = ('group_1to1', 'student_1to1', 'subject_1to1', 'professor_1to1', 'skipped_days','document_pdf', )
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
