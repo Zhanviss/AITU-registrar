@@ -1,9 +1,8 @@
 from django.core.mail import EmailMessage
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 from .models import Report
 from students.models import Student
 from .forms import ReportForm
@@ -19,6 +18,7 @@ class ReportList(LoginRequiredMixin, ListView):
     model = Report
     context_object_name = 'report'
     template_name = "report_list.html"
+    paginate_by = 4
 
 class ReportDetail(DetailView):
     model = Report 
@@ -26,11 +26,23 @@ class ReportDetail(DetailView):
     template_name = "report_detail.html"
     success_url = reverse_lazy('report_list')
 
-
 class ReportCreate(LoginRequiredMixin, CreateView):
     model = Report 
     form_class = ReportForm
     template_name = 'report_new.html'
+    success_url = reverse_lazy('report_list')
+
+class ReportDelete(LoginRequiredMixin, DeleteView):
+    model = Report 
+    context_object_name = 'report'
+    template_name = 'report_delete.html'
+    success_url = reverse_lazy('report_list')
+
+class ReportUpdate(LoginRequiredMixin, UpdateView):
+    model = Report 
+    context_object_name = 'report'
+    template_name = 'report_edit.html'
+    fields = ['skipped_days', 'is_active',]
     success_url = reverse_lazy('report_list')
 
 def load_students(request):
