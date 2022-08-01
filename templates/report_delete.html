@@ -1,0 +1,10 @@
+{% block content %}
+
+<h1>Delete report</h1>
+<form action="" method="post">{% csrf_token %}
+    <p>Are you sure you want to delete  Report #"{{report.id}}" ?</p>
+    <input type="submit" value="Confirm">
+</form>
+<a href="{% url 'report_detail' report.pk %}">Cancel</a>
+
+{% endblock content %}

@@ -130,3 +130,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL = 'report_list'
+LOGOUT_REDIRECT_URL = 'report_list'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'zhan5.z@yandex.com'
+EMAIL_HOST_PASSWORD = 'MAzhans4'
+EMAIL_USE_SSL = True

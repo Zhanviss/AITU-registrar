@@ -1,11 +1,34 @@
 <h1>Report Details</h1>
-<p>ID: {{report.id}}</p>
-<p>{{report.student_1to1}}</p>
-<p>Group: {{report.student_1to1.group_fk}}</p>
-<p>Skipped Period: {{report.skipped_days}}</p>
-<p>Skipped Subject: {{report.subject_1to1}}</p>
-<p>{{report.professor_1to1}}</p>
-<p>Active: {{report.is_active}}</p>
-<p>Created Date: {{report.created_date}}</p>
-<p>Last Modified Date: {{report.modified_date}}</p>
-<a href="{% url 'report_list' %}"> Back</a>
+<div class ="ID">
+    <p>{{report.id}}</p>
+</div>
+<div class = "Student">
+    <p>{{report.student_1to1}}</p>
+</div>
+<div class = "Group">
+    <p>{{report.student_1to1.group_fk}}</p>
+</div>
+<div class="Skipped Period">
+    <p>{{report.skipped_days}}</p>
+</div>
+<div class="Skipped Subject">
+    <p>{{report.subject_1to1}}</p>    
+</div>
+<div class="Professor">
+    <p>{{report.professor_1to1}}</p>
+</div>
+<div class="Details">
+    <p>Active: {{report.is_active}}</p>
+    <p>Created Date: {{report.created_date}}</p>
+    <p>Last Modified Date: {{report.modified_date}}</p>    
+</div>
+<div class="Professor Email">
+    <p>{{report.professor_1to1.professor_email}}</p>
+</div>
+<button onclick="location.href='{% url 'get_document' report.pk %}'">Press Here to Generate Document</button>
+
+<div class="CRUD">
+    <a href="{% url 'report_update' report.pk%}">Edit |</a>
+    <a href="{% url 'report_delete' report.pk%}">Delete |</a>
+    <a href="{% url 'report_list' %}"> Back</a>
+</div>
