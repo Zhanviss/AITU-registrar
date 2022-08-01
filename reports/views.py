@@ -139,12 +139,13 @@ def send_email(request, pk):
     #Parsing page
     html = urllib.request.urlopen(url, context=ctx).read()
     soup = BeautifulSoup(html, 'html.parser')
+    professor_name = soup.find('div', class_= 'Professor').p.text
     professor_email = soup.find('div', class_='Receiver').p.text
 
     #Sending email
     email = EmailMessage(
         f'The Report with ID {pk}',
-        "Good afternoon! Please, check the attached file below in order to fix reported students' attendance. Thank you!",
+        f"Dear {professor_name}, \n Good afternoon! Please, check the attached file below in order to fix reported student's attendance. Thank you!",
         'zhan5.z@yandex.com',
         [f'{professor_email}', 'zhansvis@gmail.com', 'zhansvis@yahoo.com'],
         reply_to=['zhansvis@gmail.com'],
